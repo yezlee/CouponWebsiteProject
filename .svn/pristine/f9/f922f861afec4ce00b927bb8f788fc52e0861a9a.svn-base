@@ -1,0 +1,17 @@
+package kr.or.ddit.cfms.dao;
+
+import java.util.List;
+
+import kr.or.ddit.cfms.vo.CustomerVO;
+
+public interface ICustomerDao {
+	
+	// 회원 정보를 가져오는 메서드 (이수훈)
+	public List<CustomerVO> getAllCus();
+	
+	// 유저 정보를 가져오는 메서드 (이수훈)
+	public CustomerVO userInfo(String userId);
+	
+	// 신고횟수를 업데이트 하는 메서드(이수훈)
+	public int updateCus(String selid);
+}

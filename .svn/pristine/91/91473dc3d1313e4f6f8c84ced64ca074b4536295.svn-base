@@ -1,0 +1,111 @@
+package kr.or.ddit.cfms.contoller;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.or.ddit.cfms.service.CFMSServiceImpl;
+import kr.or.ddit.cfms.service.ICFMSService;
+import kr.or.ddit.cfms.vo.ProductVO;
+import kr.or.ddit.cfms.vo.ProlistVO;
+
+
+@WebServlet("/mainPage.do")
+public class MainPage extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    public MainPage() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ICFMSService service = CFMSServiceImpl.getInstance();
+		
+		List<ProlistVO> prolist = service.getAllProList(); 
+		
+		request.setAttribute("prolist", prolist);
+		
+		List<ProductVO> prodlist = service.getAllProdList();
+		
+		request.setAttribute("prodlist", prodlist);
+		
+		/*
+		response.setContentType("image/jpeg");
+		byte[] image = IOUtils.toByteArray(new FileInputStream(new File("�씠誘몄��뙆�씪寃쎈줈")));
+		response.getOutputStream().write(image);
+		*/
+		
+		
+		/*String filePath = "D:/D_Other/uploadImage/11.jpg" ;     int BUF_SIZE  ;    byte[] buf = null ;   
+
+	    DataInputStream in =  null ;
+
+	    try {         
+
+	    File imgFile= new File(filePath) ;
+
+	    BUF_SIZE = (int)imgFile.length() ;   
+
+	    buf = new byte[BUF_SIZE] ;  
+
+	    in = new DataInputStream(new FileInputStream(imgFile));      
+
+	    in.readFully(buf);       
+
+	    } finally {
+
+	      in.close();
+
+	    }
+		
+		
+
+		ServletOutputStream  svrOut = null ;   BufferedOutputStream outStream = null ;
+
+	     try {                  
+
+	         svrOut = response.getOutputStream(); 
+
+	         outStream =  new BufferedOutputStream( svrOut );                   
+
+	         outStream.write(  buf, 0, buf.length );     
+
+	         outStream.flush();                      
+
+	       } catch( Exception writeException ) {
+
+	         writeException.printStackTrace();
+
+	       } finally {
+
+	          try {            
+
+	             if ( outStream != null ) outStream.close(); 
+	           } catch( Exception closeException ) {
+
+	            closeException.printStackTrace();
+
+	           }   
+
+	       }
+*/
+	  
+		request.getRequestDispatcher("board/main.jsp").forward(request, response);
+		
+		
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
